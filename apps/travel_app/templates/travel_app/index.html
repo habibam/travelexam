@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello, {{curr_user.first_name}}!</h1>
+    <h3>Your Trip's Schedule:</h3>
+    {%for trip in trips%}
+        {%if trip in curr_user.plantrip.all%}
+            <p><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></p>
+        {%endif%}
+    {%endfor%}
+     
+
+    <h3>Other User's Travel Plans:</h3>
+    {%for trip in trips%}
+        {%if trip not in curr_user.plantrip.all%}
+            
+            <p><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a>{{trip.travel_date_from}}{{trip.travel_date_to}} </p><a href="/travels/join/{{trip.id}}">Join</a>
+        {%endif%}
+    {%endfor%}
+    <a href="/travels/addnew/{{ trip.id }}"></a>
+
+
+    <a href="/travels/add">Add Travel Plan</a>
+
+    <a href="/">Logout</a>
+</body>
+</html>
